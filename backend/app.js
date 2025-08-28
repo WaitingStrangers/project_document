@@ -12,6 +12,15 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//设置跨域
+const corsOptions = {
+  origin: ['http://localhost:5173', 'http://你的前端域名'], // 允许的来源，可以是数组或者字符串 '*'
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 允许的请求方法
+  allowedHeaders: ['Content-Type', 'Authorization'], // 允许的请求头
+  credentials: true, // 是否允许携带 cookie
+};
+
+
 // 测试接口
 app.get("/", async (req, res) => {
     try {
@@ -38,6 +47,8 @@ const roleRouter = require('./routes/roleRoutes');
 app.use('/api/roles', roleRouter);
 const docRouter = require('./routes/docRoutes');
 app.use('/api/document', docRouter);
+
+
 
 
 app.use((err, req, res, next) => {
