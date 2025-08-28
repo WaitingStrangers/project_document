@@ -19,9 +19,13 @@ const router = createRouter({
 //设置路由守卫
 router.beforeEach((to,from,next) =>{
   const token = localStorage.getItem("token");
+  console.log(to.meta.pageName);
   if(to.meta.requiresAuth && !token){
     next("/Login");
-  }else{
+  } else if(to.meta.pageName == "Lagin"){
+    next("/Users");
+  }
+  else{
     next();
   }
 });

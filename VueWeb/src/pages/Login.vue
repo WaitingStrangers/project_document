@@ -19,6 +19,13 @@ import { userService } from "../service/userService"
 import { useRouter,useRoute } from "vue-router";
 import { useUserStore } from "../store/userStore"
 
+definePage({
+    meta:{
+        requiresAuth: true,
+        pageName : "Lagin"
+    }
+})
+
 const title = ref();
 title.value = "登录页面";
 const userName = ref<string>();
@@ -37,10 +44,10 @@ const getUsersMag = async ()=>{
     try{
         const userData = await userService.login(loginData);
         //请求成功
-        console.log(userData.token);
+        //console.log(userData.token);
         userToken.getterToken(userData.token);
         alert("登录成功");
-        router.push("/Users/index");
+        router.push("/Users");
     }catch (error: any){
         // 捕获 axios 请求异常
         if (error.response) {
